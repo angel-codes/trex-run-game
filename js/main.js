@@ -13,7 +13,7 @@ function loadEventListeners(){
 }
 
 function controlDinosaur(e){
-    if(e.keyCode === 32){
+    if(e.keyCode === 38){
         if(!isJumping){
             isJumping = true;
             jump();
@@ -37,7 +37,7 @@ function jump(){
                 }
 
                 // Move Down
-                position -= 5;
+                position -= 3;
                 count--;
                 position = position * gravity;
                 dinosaur.style.bottom = position + 'px';
@@ -46,9 +46,45 @@ function jump(){
         }
 
         // Move Up
-        position += 20;
+        position += 23;
         count++;
         position = position * gravity;
         dinosaur.style.bottom = position + 'px';
     }, 20);
 }
+
+function generateCactus(){
+
+    let randomTime = Math.random() * 4000;
+
+    // Generate Cactus
+    let cactusPosition = 1000;
+    const cactus = document.createElement('div');
+    if(!isGameOver) cactus.classList.add('cactus');
+    desert.appendChild(cactus);
+    cactus.style.left = cactusPosition + 'px';
+
+    // Set new position to the cactus
+    let timerId = setInterval(() => {
+
+        // Stop game when the Dinosaur collapse against a cactus
+        if(cactusPosition > 0 && cactusPosition < 60 && position < 60){
+            clearInterval(timerId);
+            alert.innerHTML = 'Game Over';
+            isGameOver = true;
+
+            // Remove all elements
+            while(desert.firstChild){
+                desert.removeChild(desert.lastChild);
+            }
+        }
+
+        cactusPosition -= 10;
+        cactus.style.left = cactusPosition + 'px';
+    }, 20);
+
+    // Generate more cactus
+    if(!isGameOver) setTimeout(generateCactus, randomTime);
+}
+
+generateCactus();
