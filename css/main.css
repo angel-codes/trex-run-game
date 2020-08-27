@@ -25,7 +25,7 @@ body {
     align-items: center;
 }
 
-.start {
+.restart {
     color: #ffffff;
     margin-bottom: 20px;
     padding: 10px 16px;
@@ -34,7 +34,7 @@ body {
     border-radius: 5px;
 }
 
-.start:hover {
+.restart:hover {
     cursor: pointer;
     background: #0f0f0f;
 }

@@ -1,5 +1,6 @@
 const desert = document.querySelector('.desert');
 const dinosaur = document.querySelector('.dinosaur');
+const button = document.querySelector('.restart');
 const alert = document.querySelector('.alert');
 
 let isJumping = false;
@@ -9,7 +10,12 @@ let isGameOver = false;
 
 loadEventListeners();
 function loadEventListeners(){
+    button.addEventListener('click', restartGame);
     document.addEventListener('keyup', controlDinosaur);
+}
+
+function restartGame(){
+    window.location.reload();
 }
 
 function controlDinosaur(e){
@@ -86,5 +92,4 @@ function generateCactus(){
     // Generate more cactus
     if(!isGameOver) setTimeout(generateCactus, randomTime);
 }
-
 generateCactus();
